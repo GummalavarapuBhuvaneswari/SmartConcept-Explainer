@@ -1,0 +1,7 @@
+streamlit
+PyMuPDF
+python-pptx
+gTTS
+fpdf
+pydub
+google-generativeai
