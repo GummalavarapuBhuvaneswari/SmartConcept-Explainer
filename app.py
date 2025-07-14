@@ -1,3 +1,5 @@
+# ✅ AutoNote Transformer (Professional UI)
+
 import streamlit as st
 import fitz  # PyMuPDF
 import google.generativeai as genai
@@ -22,23 +24,23 @@ gemini_model = genai.GenerativeModel("gemini-1.5-flash")
 def inject_custom_css():
     st.markdown("""
     <style>
-        /* Main container */
-        .main {
-            background-color: #f8f9fa;
+        html, body, .main {
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
-        
+
         /* Headers */
         h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
+            color: var(--text-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         /* Sidebar */
         .sidebar .sidebar-content {
-            background-color: #ffffff;
+            background-color: var(--background-color);
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
-        
+
         /* Buttons */
         .stButton>button {
             background-color: #3498db;
@@ -49,59 +51,61 @@ def inject_custom_css():
             transition: all 0.3s;
             border: none;
         }
-        
         .stButton>button:hover {
             background-color: #2980b9;
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        
+
         /* Select boxes */
         .stSelectbox>div>div>select {
             border: 1px solid #dfe6e9;
             border-radius: 5px;
             padding: 8px;
         }
-        
+
         /* File uploader */
         .stFileUploader>div>div {
             border: 2px dashed #bdc3c7;
             border-radius: 5px;
             padding: 20px;
         }
-        
-        /* Chat messages */
-        .stChatMessage {
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-        }
-        
-        .user-message {
-            background-color: #e3f2fd;
-        }
-        
-        .assistant-message {
-            background-color: #f5f5f5;
-        }
-        
+
         /* Cards */
         .card {
-            background: white;
+            background: var(--secondary-background-color);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             padding: 20px;
             margin-bottom: 20px;
+            color: var(--text-color);
         }
-        
+
         /* Divider */
         .divider {
             border-top: 1px solid #e0e0e0;
             margin: 20px 0;
         }
+
+        /* Audio player description */
+        .audio-caption {
+            font-size: 14px;
+            text-align: center;
+            color: var(--text-color);
+            margin-top: -10px;
+        }
     </style>
+    <script>
+    const observer = new MutationObserver((mutations, obs) => {
+        document.documentElement.style.setProperty('--background-color', getComputedStyle(document.body).backgroundColor);
+        document.documentElement.style.setProperty('--secondary-background-color', getComputedStyle(document.body).backgroundColor === 'rgb(255, 255, 255)' ? '#ffffff' : '#1e1e1e');
+        document.documentElement.style.setProperty('--text-color', getComputedStyle(document.body).color);
+    });
+    observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+    </script>
     """, unsafe_allow_html=True)
 
+inject_custom_css()
 # Initialize custom CSS
 inject_custom_css()
 
