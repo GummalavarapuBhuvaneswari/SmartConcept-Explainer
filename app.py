@@ -1,5 +1,3 @@
-# ✅ AutoNote Transformer (Professional UI)
-
 import streamlit as st
 import fitz  # PyMuPDF
 import google.generativeai as genai
